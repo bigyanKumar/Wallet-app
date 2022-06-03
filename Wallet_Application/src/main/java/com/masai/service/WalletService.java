@@ -124,7 +124,7 @@ public class WalletService implements WalletServiceIRT{
 	@Override
 	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException {
 		wallet.addBalance(amount);
-		return null;
+		return wdo.getByWallet(wallet.getId());
 	}
 
 	
