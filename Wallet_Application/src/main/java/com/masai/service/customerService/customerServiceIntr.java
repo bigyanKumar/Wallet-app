@@ -1,4 +1,4 @@
-package com.masai.customerService;
+package com.masai.service.customerService;
 
 import com.masai.entity.Customer;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;

@@ -1,4 +1,4 @@
-package com.masai.controller.customerController;
+package com.masai.controller;
 
 import javax.validation.Valid;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.masai.customerService.CustomerServiceImpl;
 import com.masai.entity.Customer;
+import com.masai.service.customerService.CustomerServiceImpl;
 
 @RestController
 public class CustomerController {

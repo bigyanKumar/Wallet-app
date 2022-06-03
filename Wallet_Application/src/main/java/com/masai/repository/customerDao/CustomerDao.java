@@ -1,4 +1,4 @@
-package com.masai.customerService.Dao;
+package com.masai.repository.customerDao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
