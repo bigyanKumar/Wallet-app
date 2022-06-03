@@ -12,6 +12,8 @@ import javax.validation.constraints.Min;
 
 import org.springframework.context.annotation.Bean;
 
+import com.masai.globalExceptionHandler.CostumerNotFoundException;
+
 import antlr.collections.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,14 +44,42 @@ public class Wallet {
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
-	public Wallet(Integer id, @Min(value = 0, message = "Balance should be greate than 0") Double balance) {
-		super();
-		this.id = id;
-		this.balance = balance;
-	}
-	public Wallet() {
-		super();
+	public java.util.List<Customer> getTran() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	
+	public synchronized void addBalance(double balance) {
+		this.balance+=balance;
+	}
+	public synchronized double deductBalance(@Min(value = 0, message = "Balance should be greate than 0") double balance) throws CostumerNotFoundException{
+		
+		if(this.balance>=balance) {
+			this.balance-=balance;
+			return balance;
+		}else {
+			throw new CostumerNotFoundException("insufficient amount in wallet");
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
