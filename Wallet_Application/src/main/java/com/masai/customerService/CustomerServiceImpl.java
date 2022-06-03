@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.masai.customerService.Dao.WalletDao;
+import com.masai.customerService.Dao.CustomerDao;
 import com.masai.entity.Customer;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;
 
@@ -13,7 +13,7 @@ import com.masai.globalExceptionHandler.CostumerNotFoundException;
 public class CustomerServiceImpl implements customerServiceIntr{
 	
 	@Autowired
-	private WalletDao wdo;
+	private CustomerDao wdo;
 
 
 	public Customer createAcc(Customer cs)throws CostumerNotFoundException  {
@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 	@Override
 	public Customer showBlacnce(String mobile) throws CostumerNotFoundException {
-		System.out.println("2"+mobile);
+		//System.out.println("2"+mobile);
 		
 		return wdo.findById(mobile).orElseThrow(()-> new CostumerNotFoundException("Customer not found with this : "+mobile));
 		

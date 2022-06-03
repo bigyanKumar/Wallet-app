@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.masai.entity.Customer;
 
 @Repository
-public interface WalletDao extends JpaRepository<Customer,String> {
+public interface CustomerDao extends JpaRepository<Customer,String> {
 	
 
 }

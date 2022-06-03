@@ -1,4 +1,4 @@
-package com.masai.controller;
+package com.masai.controller.customerController;
 
 import javax.validation.Valid;
 
@@ -15,7 +15,7 @@ import com.masai.customerService.CustomerServiceImpl;
 import com.masai.entity.Customer;
 
 @RestController
-public class Controller {
+public class CustomerController {
 	@Autowired
 	private CustomerServiceImpl csi;
 	@GetMapping("/get")
@@ -31,7 +31,7 @@ public class Controller {
 	
 	@GetMapping("/customers/{mobile}")
 	public ResponseEntity<Customer> showBlance(@PathVariable("mobile") String mobile){
-		System.out.println("1"+ mobile);
+		//System.out.println("1"+ mobile);
 		
 		return new ResponseEntity<>(csi.showBlacnce(mobile),HttpStatus.OK);
 	}
