@@ -49,7 +49,7 @@ public class Wallet {
 		return null;
 	}
 	
-	public synchronized void addBalance(double balance) {
+	public synchronized void addBalance(@Min(value = 0, message = "Balance should be greate than 0") double balance) {
 		this.balance+=balance;
 	}
 	public synchronized double deductBalance(@Min(value = 0, message = "Balance should be greate than 0") double balance) throws CostumerNotFoundException{

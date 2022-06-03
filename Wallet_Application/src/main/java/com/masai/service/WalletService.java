@@ -123,7 +123,7 @@ public class WalletService implements WalletServiceIRT{
 
 	@Override
 	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException {
-		// TODO Auto-generated method stub
+		wallet.addBalance(amount);
 		return null;
 	}
 
