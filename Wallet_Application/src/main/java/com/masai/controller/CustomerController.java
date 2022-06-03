@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.entity.Customer;
@@ -21,7 +23,7 @@ import com.masai.service.customerService.CustomerServiceImpl;
 public class CustomerController {
 	@Autowired
 	private CustomerServiceImpl csi;
-	@GetMapping("/get")
+	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String getDeta() {
 		return "Hello buddy this is testing";
 	}
