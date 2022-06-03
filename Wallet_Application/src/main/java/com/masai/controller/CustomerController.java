@@ -23,7 +23,7 @@ public class CustomerController {
 	private CustomerServiceImpl csi;
 	@GetMapping("/get")
 	public String getDeta() {
-		return "Hello buddy";
+		return "Hello buddy this is testing";
 	}
 	
 	@PostMapping("/customers")
