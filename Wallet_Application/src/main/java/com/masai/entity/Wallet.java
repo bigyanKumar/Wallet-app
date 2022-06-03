@@ -6,13 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
-
-import org.springframework.context.annotation.Bean;
-
-import antlr.collections.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,4 +26,7 @@ public class Wallet {
 	private Integer id;
 	@Min(value=0, message="Balance should be greate than 0")
 	private Double balance;
+	@OneToMany(targetEntity = Transaction.class,cascade = CascadeType.ALL)
+	@JoinColumn(name="wallet_id",referencedColumnName ="id")
+	private List<Transaction> tran;	
 }
