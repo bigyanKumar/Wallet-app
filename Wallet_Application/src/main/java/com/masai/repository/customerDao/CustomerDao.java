@@ -8,10 +8,9 @@ import com.masai.entity.Customer;
 @Repository
 public interface CustomerDao extends JpaRepository<Customer,String> {
 
-	//public Customer findByMobileNumber(String mobileNumber, String password);
+	Customer getByMobileNumber(String mobileNo);
 
-	
-	//public Customer findByMobileNumber(String mobileNumber);
+	Customer getByWallet(Integer id);
 	
 
 }
