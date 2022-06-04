@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,27 @@ public class Wallet {
 	@Min(value=0, message="Balance should be greate than 0")
 	private Double balance;
 	@OneToMany(targetEntity = Transaction.class,cascade = CascadeType.ALL)
-	@JoinColumn(name="wallet_id",referencedColumnName ="id")
-	private List<Transaction> tran;	
-	
+	@JoinColumn(name="walletId",referencedColumnName = "id" )
+	private List<Transaction> tran;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
