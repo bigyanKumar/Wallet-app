@@ -36,7 +36,7 @@ public class WalletService implements WalletServiceIRT{
 		tr.setDescription("Opening Balance");
 		tr.setDateTime(LocalDateTime.now());
 		tr.setTransactionType("Credit");
-		cs.getWallet().getTran().add(tr);
+//		cs.getWallet().getTran().add(tr);
 		return wdo.save(cs);
 	}
 
@@ -122,8 +122,10 @@ public class WalletService implements WalletServiceIRT{
 
 
 	@Override
-	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException {
+	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException, NullPointerException {
 		wallet.addBalance(amount);
+		
+		wdj.save(wallet);
 		return wdo.getByWallet(wallet.getId());
 	}
 
