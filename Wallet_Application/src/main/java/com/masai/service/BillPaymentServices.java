@@ -1,6 +1,6 @@
 package com.masai.service;
 
 public interface BillPaymentServices {
-//		commited
+//		commited sd
 	public String electricityBillPayment(Double amount , String billType);
 }
