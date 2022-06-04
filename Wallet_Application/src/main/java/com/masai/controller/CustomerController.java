@@ -19,8 +19,10 @@ import com.masai.service.customerService.CustomerServiceImpl;
 
 @RestController
 public class CustomerController {
+	
 	@Autowired
 	private CustomerServiceImpl csi;
+	
 	@GetMapping("/get")
 	public String getDeta() {
 		return "Hello buddy this is testing";

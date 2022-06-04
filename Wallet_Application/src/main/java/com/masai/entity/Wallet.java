@@ -29,4 +29,5 @@ public class Wallet {
 	@OneToMany(targetEntity = Transaction.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="wallet_id",referencedColumnName ="id")
 	private List<Transaction> tran;	
+	
 }
