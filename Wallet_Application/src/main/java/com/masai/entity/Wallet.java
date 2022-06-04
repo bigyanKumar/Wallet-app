@@ -63,7 +63,7 @@ public class Wallet {
 			return balance;
 		}else {
 			throw new CostumerNotFoundException("insufficient amount in wallet");
-		}
+		}//hi
 	}
 }
 
