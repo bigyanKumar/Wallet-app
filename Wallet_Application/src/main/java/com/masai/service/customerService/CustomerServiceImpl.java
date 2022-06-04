@@ -10,8 +10,8 @@ import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;
-import com.masai.repository.TransactionDao.TransactionDao;
 import com.masai.repository.customerDao.CustomerDao;
+import com.masai.repository.transactionDao.TransactionDao;
 import com.masai.repository.walletDao.WalletDaoJpa;
 
 @Service
