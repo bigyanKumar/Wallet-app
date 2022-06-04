@@ -123,7 +123,7 @@ public class WalletService implements WalletServiceIRT{
 
 	@Override
 	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException, NullPointerException {
-		wallet.addBalance(amount);
+		wallet.add(amount);
 		
 		wdj.save(wallet);
 		return wdo.getByWallet(wallet.getId());
