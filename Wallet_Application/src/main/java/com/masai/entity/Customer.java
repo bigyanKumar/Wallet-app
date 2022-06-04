@@ -31,5 +31,5 @@ public class Customer {
 	private String password;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
-
+	
 }
