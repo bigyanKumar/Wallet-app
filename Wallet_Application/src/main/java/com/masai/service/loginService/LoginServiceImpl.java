@@ -27,7 +27,6 @@ public class LoginServiceImpl implements LoginService {
 		
 		Optional<UserSession> user = userDao.findById(cDto.getMobileNumber());
 		
-		
 		if(user.isPresent()) {
 			
 			LocalDateTime prev=user.get().getDateTime();
@@ -41,19 +40,16 @@ public class LoginServiceImpl implements LoginService {
 			}
 		}
 		Optional<Customer> customer=cusD.findById(cDto.getMobileNumber());
+		customer.orElseThrow(()->new CostumerNotFoundException("User not found") );	
 		
-		Customer cs=customer.get();
 		
-		if(customer.isPresent()) {
-			System.out.println();
-			if(!cs.getPassword().equals(cDto.getPassword())) {
+			if(!customer.get().getPassword().equals(cDto.getPassword()))
 				throw new CostumerNotFoundException("Password Doesn't Mathch");
-			}
+			
+			
 			
 		return userDao.save(new UserSession(cDto.getMobileNumber(),LocalDateTime.now(),RandomString.make(10)));
-		}else {
-			throw new CostumerNotFoundException("User not found");
-		}
+		
 	}
 
 	@Override
