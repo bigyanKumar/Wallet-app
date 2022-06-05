@@ -3,7 +3,6 @@ package com.masai.globalExceptionHandler;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
