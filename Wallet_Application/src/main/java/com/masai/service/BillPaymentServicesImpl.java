@@ -12,6 +12,7 @@ import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.InsufficientAmountException;
 import com.masai.repository.BillPaymentDAO;
+import com.masai.repository.TransactionDAO;
 import com.masai.repository.WalletDao;
 	
 
@@ -30,12 +31,14 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 
 	@Override
 	public String payBill(double amount, String billType) {
+		Wallet wallet = new Wallet();
 		
 		if(wallet.getBalance() <= amount) {
 			throw new InsufficientAmountException("Insufficient amount in wallet");
 		}
 		
-		wallet.setWalletBalance(wallet.getWalletBalance() - amount);
+		
+		wallet.setBalance(wallet.getBalance() - amount);
 		  Transaction tx = new Transaction();
 		    tx.setAmount(amount);
 		    tx.setDateTime(LocalDateTime.now());
@@ -43,8 +46,8 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 		    tx.setTransactionType("Debit");
 		    
 		    
-			transactionDAO.save(myTransaction);
-			walletDAO.save(wallet);
+		    transactionDAO.save(tx);
+			walletdao.save(wallet);
 			
 		
 		return "Successfully done...  "  ;
