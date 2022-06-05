@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.masai.entity.Customer;
 
 @Repository
-public interface CustomerDao extends JpaRepository<Customer,String> {
-
-	Customer getByMobileNumber(String mobileNo);
-	
+public interface CustomerDao extends JpaRepository<Customer,String> {	
 
 }
