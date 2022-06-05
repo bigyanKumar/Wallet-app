@@ -6,7 +6,7 @@ import com.masai.entity.UserSession;
 
 public interface UserSessionDao extends JpaRepository<UserSession, String>{
 	
-		public UserSession findByUuid(String uuid);
+		public UserSession findByUuid(String mobile);
 		
 		
 	
