@@ -1,3 +1,13 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import Product.Login.Signup.Models.Customer;
+import Product.Login.Signup.Models.ServiceInterface.Impliments.CustomerServiceImpl;
+
 //package com.masai.controller;
 //
 //
@@ -25,8 +35,8 @@
 //import com.masai.service.customerService.CustomerServiceImpl;
 //import com.masai.service.loginService.LoginServiceImpl;
 //
-//@RestController
-//public class CustomerController {
+@RestController
+public class CustomerController {
 //	
 //	@Autowired
 //	private CustomerServiceImpl csi;
@@ -117,7 +127,26 @@
 //		Customer ucs=csi.updateCustomer(cs);
 //		ucs.setWallet(null);
 //		return new ResponseEntity<>(ucs,HttpStatus.ACCEPTED);
-//	}
+	
+	@Autowired
+	private CustomerServiceImpl customerServiceImpl;
+	
+	@PostMapping("/customer")
+	public Customer saveCustomer(@RequestBody Customer customer)
+	{
+		return customerServiceImpl.createCustomer(customer);
+	}
+	
+	@PutMapping("/customer")
+	public Customer updateCustomer(@RequestBody Customer customer, @RequestParam(required=false) String key)
+	{
+		
+	return customerServiceImpl.updateCustomer(customer,key);
+	}
+	
+	
+	
+	}
 //	
 //
 //}
