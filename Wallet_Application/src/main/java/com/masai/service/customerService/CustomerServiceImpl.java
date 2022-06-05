@@ -11,19 +11,17 @@ import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;
 import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.transactionDao.TransactionDao;
-import com.masai.repository.walletDao.WalletDaoJpa;
 
 @Service
 public class CustomerServiceImpl implements customerServiceIntr{
 	
 	@Autowired
 	private CustomerDao wdo;
-	@Autowired
-	private WalletDaoJpa wdj;
-	
-	@Autowired
-	private TransactionDao trans;
+//	@Autowired
+//	private WalletDaoJpa wdj;
+//	
+//	@Autowired
+//	private TransactionDao trans;
 	
 	public Customer createAcc(Customer cs)throws CostumerNotFoundException  {
 		// TODO Auto-generated method stub

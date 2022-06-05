@@ -12,20 +12,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.DTO.CustomerDTO;
 import com.masai.entity.Customer;
+import com.masai.entity.UserSession;
 import com.masai.service.customerService.CustomerServiceImpl;
+import com.masai.service.loginService.LoginServiceImpl;
 
 @RestController
 public class CustomerController {
 	
 	@Autowired
 	private CustomerServiceImpl csi;
+	@Autowired
+	private LoginServiceImpl login;
 	
 	@GetMapping("/get")
 	public String getDeta() {
 		return "Hello buddy this is testing";
+	}
+	@PostMapping("userlogin")
+	public ResponseEntity<UserSession> loginSession(@RequestBody CustomerDTO cusD){
+		return new ResponseEntity<>(login.loginService(cusD),HttpStatus.OK);
+	}
+	@GetMapping("userlogout")
+	public ResponseEntity<String> logoutSession(@RequestParam("key") String key){
+		return new ResponseEntity<>(login.logoutService(key),HttpStatus.OK);
 	}
 	
 	@PostMapping("/customers")
