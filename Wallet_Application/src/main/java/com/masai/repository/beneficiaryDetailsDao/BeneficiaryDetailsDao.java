@@ -1,5 +1,9 @@
 package com.masai.repository.beneficiaryDetailsDao;
 
-public interface BeneficiaryDetailsDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.masai.entity.BenificiaryDetails;
+
+public interface BeneficiaryDetailsDao extends JpaRepository<BenificiaryDetails, String>{
 
 }
