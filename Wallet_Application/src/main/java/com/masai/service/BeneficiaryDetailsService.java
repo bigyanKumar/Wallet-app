@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BeneficiaryDetailsDao;
 import com.masai.service.customerService.CustomerServiceImpl;
 
@@ -20,18 +20,18 @@ public class BeneficiaryDetailsService implements BeneficiaryDetailsServiceInter
 	private CustomerServiceImpl customerService;
 
 	@Override
-	public BeneficiaryDetails addBeneficiary(BeneficiaryDetails beneficiaryDetail) throws CostumerNotFoundException {
+	public BeneficiaryDetails addBeneficiary(BeneficiaryDetails beneficiaryDetail) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		if(beneficiaryDetail!=null)
 			return beneficiaryDao.save(beneficiaryDetail);
-		else throw new CostumerNotFoundException("Invalid Input");
+		else throw new CustomerNotFoundException("Invalid Input");
 	}
 
 	@Override
-	public BeneficiaryDetails deleteBeneficiary(BeneficiaryDetails beneficiaryDetail) throws CostumerNotFoundException {
+	public BeneficiaryDetails deleteBeneficiary(BeneficiaryDetails beneficiaryDetail) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		//
-		beneficiaryDetail=beneficiaryDao.findById(beneficiaryDetail.getId()).orElseThrow(()-> new CostumerNotFoundException("Beneficiary nor found"));
+		beneficiaryDetail=beneficiaryDao.findById(beneficiaryDetail.getId()).orElseThrow(()-> new CustomerNotFoundException("Beneficiary nor found"));
 		if(beneficiaryDetail!=null) {
 			beneficiaryDetail.setWallet(null);
 			beneficiaryDao.save(beneficiaryDetail);
@@ -39,26 +39,26 @@ public class BeneficiaryDetailsService implements BeneficiaryDetailsServiceInter
 			return beneficiaryDetail;
 		}
 			 
-		else throw new CostumerNotFoundException("Invalid Input");
+		else throw new CustomerNotFoundException("Invalid Input");
 	}
 
 	@Override
-	public BeneficiaryDetails viewBeneficiary(String mobileNumber) throws CostumerNotFoundException {
+	public BeneficiaryDetails viewBeneficiary(String mobileNumber) throws CustomerNotFoundException {
 		if(mobileNumber!=null&&mobileNumber!="") {
 			return beneficiaryDao.findByMobileNo(mobileNumber);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 		
 	}
 
 	@Override
-	public List<BeneficiaryDetails> viewAllBeneficiary(Customer customer) throws CostumerNotFoundException {
+	public List<BeneficiaryDetails> viewAllBeneficiary(Customer customer) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		if(customer!=null) {
 			int a=customer.getWallet().getId();
 			return beneficiaryDao.findAllByWalletId(a);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 	}
 	
 	

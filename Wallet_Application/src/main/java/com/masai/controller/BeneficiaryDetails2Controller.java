@@ -16,7 +16,7 @@ import com.masai.controller.dtos.BeneficiaryDetailsDto;
 import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.Wallet;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.walletDao.WalletDaoJpa;
 import com.masai.service.BeneficiaryDetailsService;
 
@@ -30,18 +30,18 @@ public class BeneficiaryDetails2Controller{
 	private WalletDaoJpa wDao;
 
 	@PostMapping(value="/Beneficiary0services/add")
-	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetailsDto beneficiaryDto) throws CostumerNotFoundException {
+	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetailsDto beneficiaryDto) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
-		wDao.findById(beneficiaryDto.walletId).orElseThrow(()-> new CostumerNotFoundException("wallet nor found"));
+		wDao.findById(beneficiaryDto.walletId).orElseThrow(()-> new CustomerNotFoundException("wallet nor found"));
 		Optional<Wallet> wallet=Optional.ofNullable(wDao.getById(beneficiaryDto.walletId));
 		Wallet wallet2=wallet.get();
 		if(beneficiaryDto!=null&&wallet.isPresent())
 			return beneficiaryDetailsService.addBeneficiary(new BeneficiaryDetails(0,beneficiaryDto.name,beneficiaryDto.mobileNo,wallet2));
-		else throw new CostumerNotFoundException("Invalid Input");
+		else throw new CustomerNotFoundException("Invalid Input");
 	}
 
 	@GetMapping(value="/Beneficiary0services/delete/{id}")
-	public BeneficiaryDetails deleteBeneficiaryRest(@PathVariable("id") Integer id) throws CostumerNotFoundException {
+	public BeneficiaryDetails deleteBeneficiaryRest(@PathVariable("id") Integer id) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		BeneficiaryDetails beneficiaryDetail=new BeneficiaryDetails();
 		beneficiaryDetail.setId(id);
@@ -50,27 +50,27 @@ public class BeneficiaryDetails2Controller{
 			return  beneficiaryDetailsService.deleteBeneficiary(beneficiaryDetail);
 		}
 			 
-		else throw new CostumerNotFoundException("Invalid Input");
+		else throw new CustomerNotFoundException("Invalid Input");
 	}
 
 	@GetMapping(value="/Beneficiary0services/view/{mobileNo}")
-	public BeneficiaryDetails viewBeneficiaryRest(String mobileNumber) throws CostumerNotFoundException {
+	public BeneficiaryDetails viewBeneficiaryRest(String mobileNumber) throws CustomerNotFoundException {
 		if(mobileNumber!=null&&mobileNumber!="") {
 			return beneficiaryDetailsService.viewBeneficiary(mobileNumber);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 		
 	}
 
 	@PostMapping(value="/Beneficiary0services/viewall")
-		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer) throws CostumerNotFoundException {
+		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		System.out.println(customer.getWallet().getId());
 		if(customer!=null) {
 			int a=customer.getWallet().getId();
 			return beneficiaryDetailsService.viewAllBeneficiary(customer);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 	}
 	
 //asda

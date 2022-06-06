@@ -15,8 +15,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(CostumerNotFoundException.class)
-	public ResponseEntity<ErrorException> custumerNotFound(CostumerNotFoundException cnfe, WebRequest wq){
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public ResponseEntity<ErrorException> custumerNotFound(CustomerNotFoundException cnfe, WebRequest wq){
 		
 		return new ResponseEntity<>(new ErrorException(LocalDateTime.now(),cnfe.getMessage(),
 				wq.getDescription(false)), HttpStatus.BAD_REQUEST);
