@@ -1,6 +1,7 @@
 package com.masai.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;
 import com.masai.repository.walletDao.WalletDaoJpa;
 import com.masai.service.BeneficiaryDetailsService;
-import com.masai.service.WalletService;
+
 
 @RestController
 public class BeneficiaryDetails2Controller{
