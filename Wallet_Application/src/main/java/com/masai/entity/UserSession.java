@@ -1,30 +1,23 @@
 package com.masai.entity;
-
-
 import java.time.LocalDateTime;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 @Entity
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Transaction {
+@ToString
+public class UserSession {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer transactionId;
-	private String transactionType;
+	private String mobile;
 	private LocalDateTime dateTime;
-	private Double amount;
-	private String description;
+	@Column(unique=true)
+	private String uuid;
 }

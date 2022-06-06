@@ -2,9 +2,8 @@ package com.masai.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
@@ -20,13 +19,13 @@ import lombok.ToString;
 public class BankAccount {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private Integer accoutNo;
 	private String ifscCode;
 	private String Bankname;
 	private Double balance;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,targetEntity = Wallet.class)
+	@JoinColumn(name="walletId")
 	private Wallet wallet;
 
 }
