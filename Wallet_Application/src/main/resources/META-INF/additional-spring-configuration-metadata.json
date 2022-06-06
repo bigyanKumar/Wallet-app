@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "<<<<<<<",
+    "type": "java.lang.String",
+    "description": "A description for '<<<<<<<'"
+  },
+  {
+    "name": ">>>>>>>",
+    "type": "java.lang.String",
+    "description": "A description for '>>>>>>>'"
+  }
+]}
