@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.DTO.BankAccountDTO;
 import com.masai.entity.BankAccount;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
@@ -61,31 +62,20 @@ public class BankAccountServiceImpl implements BankAccountService {
 		else
 			throw new CustomerNotFoundException("No Account Found with this Accoutn Number: "+accountNumber); 
 	}
-//	
-//	@Override
-//	public List<BankAccountDTO> getAccountByWalletId(Integer walletId) throws CustomerNotFoundException {
-//        
-//		    List<BankAccountDTO> bankDTO =  bankAccRepo.viewAccount(walletId);
-//		    
-//		    if(bankDTO.size()>0)
-//		    	return bankDTO;
-//		    else
-//		    	throw new CustomerNotFoundException("No Account Found With this wallet Id: "+walletId);
-//      
-//	}
-
-//	
-//	@Override
-//	public List<BankAccountDTO> viewAllAccount(Integer walletId) throws CustomerNotFoundException {
-//         
-//		   List<BankAccountDTO> accList = bankAccRepo.viewAllAccount(walletId);
-//		   if(accList.size()>0)
-//			   return accList;
-//		   else
-//			   throw new CustomerNotFoundException("No Account Found for this wallet Id: "+walletId);
-//     
-//	}
-//	
+	
+	@Override
+	public List<BankAccountDTO> getAccountByWalletId(Integer walletId) throws CustomerNotFoundException {
+        
+		    List<BankAccountDTO> bankDTO =  bankAccRepo.viewAccount(walletId);
+		    
+		    if(bankDTO.size()>0)
+		    	return bankDTO;
+		    else
+		    	throw new CustomerNotFoundException("No Account Found With this wallet Id: "+walletId);
+      
+	}
+	
+	
 	@Override
 	public String removeAccount(Integer accountNo) throws CustomerNotFoundException {
                   
@@ -105,6 +95,28 @@ public class BankAccountServiceImpl implements BankAccountService {
 	}
 	
 	
+	@Override
+	public BankAccount moneyTransfer(Integer accountNumber1, Integer accountNumber2, double balance) {
+           
+		    Optional<BankAccount> opt1 = bankAccRepo.findById(accountNumber1);
+		    Optional<BankAccount> opt2 = bankAccRepo.findById(accountNumber2);
+		    
+		    if(opt1.isPresent()&&opt2.isPresent())
+		    {
+		    	opt2.get().setBankBalance(opt2.get().getBankBalance()+balance);
+		    	opt1.get().setBankBalance(opt1.get().getBankBalance()-balance);
+		    	bankAccRepo.save(opt2.get());
+		    	bankAccRepo.save(opt1.get());
+		    	return opt1.get();
+		    }
+		    else
+		    	throw new CustomerNotFoundException("Enter Correct Account Number");
+        
+	}
+	
+	
+	
+	
 	//for generating unique number
 	 public static int generateUniqueId() {
 		 
@@ -115,10 +127,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 	        str=filterStr.replaceAll("-", "");
 	        return Integer.parseInt(str);
 	    }
-
-	
-
-	
 
 	
 
