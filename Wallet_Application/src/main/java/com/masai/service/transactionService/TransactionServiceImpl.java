@@ -3,7 +3,7 @@ package com.masai.service.transactionService;
 import com.masai.DTO.Date;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.customerDao.CustomerDao;
 import com.masai.repository.userSessionDao.UserSessionDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class TransactionServiceImpl implements TransactionServiceIntr {
 
 
     @Override
-    public List<Transaction> getTransaction(String key) throws CostumerNotFoundException {
+    public List<Transaction> getTransaction(String key) throws CustomerNotFoundException {
 
         Optional<Customer> cust=customer.findById(user.findByUuid(key).getMobile());
 
@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionServiceIntr {
         return tran;
     }
     @Override
-    public List<Transaction> getTransactionByDate(Date date, String key) throws CostumerNotFoundException {
+    public List<Transaction> getTransactionByDate(Date date, String key) throws CustomerNotFoundException {
     	
     	Optional<Customer> cust =customer.findById(user.findByUuid(key).getMobile());
     	 

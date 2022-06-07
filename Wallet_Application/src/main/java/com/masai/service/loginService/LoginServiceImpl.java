@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.masai.DTO.CustomerDTO;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.customerDao.CustomerDao;
 import com.masai.repository.userSessionDao.UserSessionDao;
 
@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 	private UserSessionDao userDao;
 
 	@Override
-	public UserSession loginService(CustomerDTO cDto) throws CostumerNotFoundException {
+	public UserSession loginService(CustomerDTO cDto) throws CustomerNotFoundException {
 		
 		Optional<UserSession> user = userDao.findById(cDto.getMobileNumber());
 		
@@ -40,11 +40,11 @@ public class LoginServiceImpl implements LoginService {
 			}
 		}
 		Optional<Customer> customer=cusD.findById(cDto.getMobileNumber());
-		customer.orElseThrow(()->new CostumerNotFoundException("User not found") );	
+		customer.orElseThrow(()->new CustomerNotFoundException("User not found") );	
 		
 		
 			if(!customer.get().getPassword().equals(cDto.getPassword()))
-				throw new CostumerNotFoundException("Password Doesn't Mathch");
+				throw new CustomerNotFoundException("Password Doesn't Mathch");
 			
 			
 			
@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
 		 userDao.delete(user);  
 		return "Successfully Logged out. thank you!";
 		}else {
-			throw new CostumerNotFoundException("User not Fount in our session");
+			throw new CustomerNotFoundException("User not Fount in our session");
 		}
 	}
 
