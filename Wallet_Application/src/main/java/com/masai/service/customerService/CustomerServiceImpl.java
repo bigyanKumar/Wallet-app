@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.customerDao.CustomerDao;
 
 @Service
@@ -23,12 +23,12 @@ public class CustomerServiceImpl implements customerServiceIntr{
 //	@Autowired
 //	private TransactionDao trans;
 	
-	public Customer createAcc(Customer cs)throws CostumerNotFoundException  {
+	public Customer createAcc(Customer cs)throws CustomerNotFoundException  {
 		// TODO Auto-generated method stub
 		Optional<Customer> opt=wdo.findById(cs.getMobileNumber());
 		
 		if(opt.isPresent()){
-			throw new CostumerNotFoundException("Customer is present already with this mobile number : "+cs.getMobileNumber());
+			throw new CustomerNotFoundException("Customer is present already with this mobile number : "+cs.getMobileNumber());
 		}
 		Transaction tr=new Transaction();
 		tr.setAmount(cs.getWallet().getBalance());
@@ -41,21 +41,21 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 
 	@Override
-	public Customer showBlacnce(String mobile) throws CostumerNotFoundException {
+	public Customer showBlacnce(String mobile) throws CustomerNotFoundException {
 		//System.out.println("2"+mobile);
 		
-		return wdo.findById(mobile).orElseThrow(()-> new CostumerNotFoundException("Customer not found with this : "+mobile));
+		return wdo.findById(mobile).orElseThrow(()-> new CustomerNotFoundException("Customer not found with this : "+mobile));
 		
 		//return wdo.findById(mobile).orElseThrow(()->new );
 	}
 
 
 	@Override
-	public Customer depositAmount(String mobile, Double amount) throws CostumerNotFoundException {
+	public Customer depositAmount(String mobile, Double amount) throws CustomerNotFoundException {
 		//System.out.println(mobile+""+amount);
 		    Optional<Customer> opt=wdo.findById(mobile);
 		    if(opt.isPresent()==false) {
-		    	throw new CostumerNotFoundException("Customer not found with this : "+mobile);
+		    	throw new CustomerNotFoundException("Customer not found with this : "+mobile);
 		    }
 		    
 		    Customer cs=opt.get();
@@ -73,25 +73,25 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 
 	@Override
-	public String fundTransfer(String mobileNo, String targetMobileNo, Double amount) throws CostumerNotFoundException {
+	public String fundTransfer(String mobileNo, String targetMobileNo, Double amount) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public List<Customer> getListCustomer() throws CostumerNotFoundException {
+	public List<Customer> getListCustomer() throws CustomerNotFoundException {
 		
 		return wdo.findAll();
 	}
 
 
 	@Override
-	public Customer updateCustomer(Customer customer) throws CostumerNotFoundException {
+	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
 		Optional<Customer> opt=wdo.findById(customer.getMobileNumber());
 		
 		if(opt.isPresent()==false) {
-			throw new CostumerNotFoundException("Customer not found");
+			throw new CustomerNotFoundException("Customer not found");
 		}
 		Customer cs=opt.get();
 		cs.setMobileNumber(customer.getMobileNumber());
@@ -102,7 +102,7 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 
 	@Override
-	public Customer addMoney(Wallet wallet, Double amount) throws CostumerNotFoundException {
+	public Customer addMoney(Wallet wallet, Double amount) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}

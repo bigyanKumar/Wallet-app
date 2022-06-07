@@ -3,11 +3,11 @@ package com.masai.globalExceptionHandler;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class CostumerNotFoundException extends RuntimeException{
+public class CustomerNotFoundException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 	
-	public CostumerNotFoundException(String msg) {
+	public CustomerNotFoundException(String msg) {
 		super(msg);
 	}
 
