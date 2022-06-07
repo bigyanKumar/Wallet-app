@@ -1,6 +1,7 @@
 package com.masai.service;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import com.masai.entity.BillPayment;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.globalExceptionHandler.InsufficientAmountException;
 import com.masai.repository.BillPaymentDao.BillPaymentDao;
 import com.masai.repository.customerDao.CustomerDao;
@@ -77,7 +78,7 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 
 
 	@Override
-	public List<BillPayment> viewBillPayment(String key) throws CostumerNotFoundException {
+	public List<BillPayment> viewBillPayment(String key) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
         Optional<Customer> cust=customer.findById(user.findByUuid(key).getMobile());
         List<BillPayment> bill = billpd.findAllBillPaymentsByWalletId(cust.get().getWallet().getId());
