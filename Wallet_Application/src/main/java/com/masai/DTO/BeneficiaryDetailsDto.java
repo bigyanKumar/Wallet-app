@@ -1,4 +1,4 @@
-package com.masai.controller.dtos;
+package com.masai.DTO;
 
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;

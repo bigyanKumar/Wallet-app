@@ -1,4 +1,4 @@
-package com.masai.repository.BillPaymentDao;
+package com.masai.repository;
 
 import java.util.List;
 

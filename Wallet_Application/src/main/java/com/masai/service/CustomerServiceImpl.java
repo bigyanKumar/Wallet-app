@@ -1,4 +1,4 @@
-package com.masai.service.customerService;
+package com.masai.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.customerDao.CustomerDao;
+import com.masai.repository.CustomerDao;
 
 @Service
 public class CustomerServiceImpl implements customerServiceIntr{

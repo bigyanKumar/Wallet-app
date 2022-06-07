@@ -16,11 +16,11 @@ import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.globalExceptionHandler.InsufficientAmountException;
-import com.masai.repository.BillPaymentDao.BillPaymentDao;
-import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.transactionDao.TransactionDao;
-import com.masai.repository.userSessionDao.UserSessionDao;
-import com.masai.repository.walletDao.WalletDaoJpa;
+import com.masai.repository.BillPaymentDao;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.TransactionDao;
+import com.masai.repository.UserSessionDao;
+import com.masai.repository.WalletDaoJpa;
 
 	
 

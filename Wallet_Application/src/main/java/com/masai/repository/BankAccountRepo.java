@@ -1,4 +1,4 @@
-package com.masai.BankAccountRepository;
+package com.masai.repository;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.masai.entity.BankAccount;
-import com.masai.entity.BankAccountDTO;
 
 @Repository
 public interface BankAccountRepo extends JpaRepository<BankAccount, Integer>{

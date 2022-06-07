@@ -1,11 +1,12 @@
-package com.masai.service.transactionService;
+package com.masai.service;
 
 import com.masai.DTO.Date;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.userSessionDao.UserSessionDao;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.UserSessionDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;

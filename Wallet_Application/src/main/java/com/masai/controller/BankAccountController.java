@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.masai.BankAccountService.BankAccountServiceImpl;
 import com.masai.entity.BankAccount;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.userSessionDao.UserSessionDao;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.UserSessionDao;
+import com.masai.service.BankAccountServiceImpl;
 
 @RestController
 public class BankAccountController{

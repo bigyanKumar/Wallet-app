@@ -11,10 +11,10 @@ import com.masai.entity.Customer;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BeneficiaryDetailsDao;
-import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.userSessionDao.UserSessionDao;
-import com.masai.repository.walletDao.WalletDaoJpa;
-import com.masai.service.customerService.CustomerServiceImpl;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.UserSessionDao;
+import com.masai.repository.WalletDaoJpa;
+
 
 @Service
 public class BeneficiaryDetailsService implements BeneficiaryDetailsServiceInter {

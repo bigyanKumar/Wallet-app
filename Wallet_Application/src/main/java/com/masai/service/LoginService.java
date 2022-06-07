@@ -1,4 +1,4 @@
-package com.masai.service.loginService;
+package com.masai.service;
 
 import com.masai.DTO.CustomerDTO;
 

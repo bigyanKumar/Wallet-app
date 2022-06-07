@@ -1,4 +1,4 @@
-package com.masai.controller.transaction;
+package com.masai.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +16,8 @@ import com.masai.DTO.Date;
 import com.masai.entity.Transaction;
 import com.masai.entity.UserSession;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.userSessionDao.UserSessionDao;
-import com.masai.service.transactionService.TransactionServiceImpl;
+import com.masai.repository.UserSessionDao;
+import com.masai.service.TransactionServiceImpl;
 
 @RestController
 public class TransactionController {

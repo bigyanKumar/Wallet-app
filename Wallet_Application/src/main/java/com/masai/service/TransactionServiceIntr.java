@@ -1,4 +1,4 @@
-package com.masai.service.transactionService;
+package com.masai.service;
 
 import com.masai.DTO.Date;
 import com.masai.entity.Transaction;

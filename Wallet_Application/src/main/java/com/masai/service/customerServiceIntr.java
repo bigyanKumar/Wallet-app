@@ -1,4 +1,4 @@
-package com.masai.service.customerService;
+package com.masai.service;
 
 import java.util.List;
 

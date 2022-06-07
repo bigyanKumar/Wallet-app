@@ -1,4 +1,4 @@
-package com.masai.controller.customerService;
+package com.masai.controller;
 
 
 import java.time.LocalDateTime;
@@ -21,9 +21,9 @@ import com.masai.DTO.CustomerDTO;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.userSessionDao.UserSessionDao;
-import com.masai.service.customerService.CustomerServiceImpl;
-import com.masai.service.loginService.LoginServiceImpl;
+import com.masai.repository.UserSessionDao;
+import com.masai.service.CustomerServiceImpl;
+import com.masai.service.LoginServiceImpl;
 
 @RestController
 public class CustomerController {

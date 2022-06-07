@@ -1,9 +1,8 @@
-package com.masai.BankAccountService;
+package com.masai.service;
 
 import java.util.List;
 
 import com.masai.entity.BankAccount;
-import com.masai.entity.BankAccountDTO;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 
 public interface BankAccountService {

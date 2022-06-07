@@ -1,4 +1,4 @@
-package com.masai.service.loginService;
+package com.masai.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import com.masai.DTO.CustomerDTO;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
-import com.masai.repository.customerDao.CustomerDao;
-import com.masai.repository.userSessionDao.UserSessionDao;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.UserSessionDao;
 
 import net.bytebuddy.utility.RandomString;
 
