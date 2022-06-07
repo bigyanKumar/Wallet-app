@@ -8,15 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
+import com.masai.entity.UserSession;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.CustomerDao;
+import com.masai.repository.UserSessionDao;
 
 @Service
 public class CustomerServiceImpl implements customerServiceIntr{
 	
 	@Autowired
 	private CustomerDao wdo;
+	@Autowired
+	private UserSessionDao user;
 //	@Autowired
 //	private WalletDaoJpa wdj;
 //	
@@ -80,9 +84,12 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 
 	@Override
-	public List<Customer> getListCustomer() throws CustomerNotFoundException {
+	public Customer getListCustomer(String key) throws CustomerNotFoundException {
 		
-		return wdo.findAll();
+		UserSession userS=user.findByUuid(key);	
+		
+		
+		return wdo.findById(userS.getMobile()).get();
 	}
 
 

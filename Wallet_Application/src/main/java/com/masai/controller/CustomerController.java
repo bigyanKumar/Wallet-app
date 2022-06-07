@@ -86,7 +86,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("customers")
-	public ResponseEntity<List<Customer>> getCustomer(@RequestParam("key") String key){
+	public ResponseEntity<Customer> getCustomer(@RequestParam("key") String key){
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
@@ -97,9 +97,8 @@ public class CustomerController {
 			userDao.delete(user);
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
-		List<Customer> l1c=csi.getListCustomer();
-//		l1c.forEach((cs)-> cs.setWallet(null));
-		return new ResponseEntity<>(l1c,HttpStatus.OK);
+		
+		return new ResponseEntity<>(csi.getListCustomer(key),HttpStatus.OK);
 	}
 	@PatchMapping("/customers")
 	public ResponseEntity<Customer> updateAccount(@Valid @RequestBody Customer cs,@RequestParam("key") String key){

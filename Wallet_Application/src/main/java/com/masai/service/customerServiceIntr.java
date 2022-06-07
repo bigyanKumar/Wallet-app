@@ -16,7 +16,7 @@ public interface customerServiceIntr {
 	
 	public String fundTransfer(String mobileNo,String targetMobileNo, Double amount)throws CustomerNotFoundException;
 	
-	public List<Customer> getListCustomer() throws CustomerNotFoundException ;
+	public Customer getListCustomer(String key) throws CustomerNotFoundException ;
 	
 	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException;
 	
