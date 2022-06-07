@@ -21,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BenificiaryDetails {
+public class BeneficiaryDetails {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

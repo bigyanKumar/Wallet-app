@@ -20,7 +20,7 @@ import com.masai.entity.BillPayment;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.entity.Wallet;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.customerDao.CustomerDao;
 import com.masai.repository.userSessionDao.UserSessionDao;
 import com.masai.service.BillPaymentServices;
@@ -45,13 +45,13 @@ public class BillPaymentController {
 		
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
-			throw new CostumerNotFoundException("You are not authoraised person please login first.");
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
-			throw new CostumerNotFoundException("Your session is expired please login again");
+			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		Optional<Customer> cs = customerDao.findById(user.getMobile());
 		billPayment.setWallet(cs.get().getWallet());
@@ -64,13 +64,13 @@ public class BillPaymentController {
 		public List<BillPayment> getAllBillPayment(@RequestParam("key") String key){
 			UserSession user=userDao.findByUuid(key);
 			if(user==null) {
-				throw new CostumerNotFoundException("You are not authoraised person please login first.");
+				throw new CustomerNotFoundException("You are not authoraised person please login first.");
 			}
 			LocalDateTime prev=user.getDateTime();
 			LocalDateTime date=LocalDateTime.now();
 			if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 				userDao.delete(user);
-				throw new CostumerNotFoundException("Your session is expired please login again");
+				throw new CustomerNotFoundException("Your session is expired please login again");
 			}
 			
 			return billservices.viewBillPayment(key);

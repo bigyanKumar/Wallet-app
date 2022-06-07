@@ -22,7 +22,7 @@ import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.entity.Wallet;
-import com.masai.globalExceptionHandler.CostumerNotFoundException;
+import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BeneficiaryDetailsDao;
 import com.masai.repository.customerDao.CustomerDao;
 import com.masai.repository.userSessionDao.UserSessionDao;
@@ -45,16 +45,16 @@ public class BeneficiaryDetails2Controller {
 	private UserSessionDao userDao;
 
 	@PostMapping(value="/Beneficiary0services/add")
-	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetails beneficiaryDetail, @RequestParam("key") String key) throws CostumerNotFoundException {
+	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetails beneficiaryDetail, @RequestParam("key") String key) throws CustomerNotFoundException {
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
-			throw new CostumerNotFoundException("You are not authoraised person please login first.");
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
-			throw new CostumerNotFoundException("Your session is expired please login again");
+			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
 		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
@@ -67,7 +67,7 @@ public class BeneficiaryDetails2Controller {
 		
 		
 		if(optBene2.isPresent()) {
-			throw new CostumerNotFoundException("beneficiary already exist");
+			throw new CustomerNotFoundException("beneficiary already exist");
 		}
 		
 //		wDao.findById(beneficiaryDto.walletId).orElseThrow(()-> new CostumerNotFoundException("wallet nor found"));
@@ -89,18 +89,18 @@ public class BeneficiaryDetails2Controller {
 	
 	
 	@DeleteMapping(value="/Beneficiary0services")
-	public BeneficiaryDetails deleteBeneficiaryRest(@RequestParam("phone") String phone, @RequestParam("key") String key) throws CostumerNotFoundException {
+	public BeneficiaryDetails deleteBeneficiaryRest(@RequestParam("phone") String phone, @RequestParam("key") String key) throws CustomerNotFoundException {
 		
 		
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
-			throw new CostumerNotFoundException("You are not authoraised person please login first.");
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
-			throw new CostumerNotFoundException("Your session is expired please login again");
+			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
 		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
@@ -132,19 +132,19 @@ public class BeneficiaryDetails2Controller {
 	
 	
 	@GetMapping(value="/Beneficiary0services/view/")
-	public BeneficiaryDetails viewBeneficiaryRest(@RequestParam String mobileNumber, @RequestParam("key") String key) throws CostumerNotFoundException {
+	public BeneficiaryDetails viewBeneficiaryRest(@RequestParam String mobileNumber, @RequestParam("key") String key) throws CustomerNotFoundException {
 		
 		
 		
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
-			throw new CostumerNotFoundException("You are not authoraised person please login first.");
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
-			throw new CostumerNotFoundException("Your session is expired please login again");
+			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
 		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
@@ -152,7 +152,7 @@ public class BeneficiaryDetails2Controller {
 		if(mobileNumber!=null&&mobileNumber!="") {
 			return beneficiaryDetailsService.viewBeneficiary(mobileNumber,wallet);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 		
 	}
 	
@@ -170,20 +170,20 @@ public class BeneficiaryDetails2Controller {
 	
 
 	@PostMapping(value="/Beneficiary0services/viewall")
-		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer,@RequestParam("key") String key) throws CostumerNotFoundException {
+		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer,@RequestParam("key") String key) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		
 		
 		
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
-			throw new CostumerNotFoundException("You are not authoraised person please login first.");
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
-			throw new CostumerNotFoundException("Your session is expired please login again");
+			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
 		
@@ -194,7 +194,7 @@ public class BeneficiaryDetails2Controller {
 			int a=customer.getWallet().getId();
 			return beneficiaryDetailsService.viewAllBeneficiary(customer);
 		}
-		throw new CostumerNotFoundException("Invalid Input");
+		throw new CustomerNotFoundException("Invalid Input");
 	}
 	
 //asda
