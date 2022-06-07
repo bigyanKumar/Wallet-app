@@ -98,7 +98,7 @@ public class CustomerController {
 			throw new CostumerNotFoundException("Your session is expired please login again");
 		}
 		List<Customer> l1c=csi.getListCustomer();
-		l1c.forEach((cs)-> cs.setWallet(null));
+//		l1c.forEach((cs)-> cs.setWallet(null));
 		return new ResponseEntity<>(l1c,HttpStatus.OK);
 	}
 	@PatchMapping("/customers")

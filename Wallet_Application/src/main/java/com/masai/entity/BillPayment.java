@@ -1,5 +1,7 @@
 package com.masai.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ public class BillPayment {
 	private Integer billId;
 	private String billType;
 	private Double amount;
-	private String paymentDate;
+	private LocalDateTime paymentDate;
 	@ManyToOne(targetEntity = Wallet.class,cascade =CascadeType.ALL)
 	@JoinColumn(name="walletId")
 	private Wallet wallet;

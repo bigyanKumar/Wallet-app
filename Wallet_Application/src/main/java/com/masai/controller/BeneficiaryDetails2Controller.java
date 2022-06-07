@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.controller.dtos.BeneficiaryDetailsDto;
-import com.masai.entity.BeneficiaryDetails;
+import com.masai.entity.BenificiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CostumerNotFoundException;
 import com.masai.repository.walletDao.WalletDaoJpa;
 import com.masai.service.BeneficiaryDetailsService;
-import com.masai.service.WalletService;
 
 @RestController
 public class BeneficiaryDetails2Controller{
@@ -29,20 +28,20 @@ public class BeneficiaryDetails2Controller{
 	private WalletDaoJpa wDao;
 
 	@PostMapping(value="/Beneficiary0services/add")
-	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetailsDto beneficiaryDto) throws CostumerNotFoundException {
+	public BenificiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetailsDto beneficiaryDto) throws CostumerNotFoundException {
 		// TODO Auto-generated method stub
 		wDao.findById(beneficiaryDto.walletId).orElseThrow(()-> new CostumerNotFoundException("wallet nor found"));
 		Optional<Wallet> wallet=Optional.ofNullable(wDao.getById(beneficiaryDto.walletId));
 		Wallet wallet2=wallet.get();
 		if(beneficiaryDto!=null&&wallet.isPresent())
-			return beneficiaryDetailsService.addBeneficiary(new BeneficiaryDetails(0,beneficiaryDto.name,beneficiaryDto.mobileNo,wallet2));
+			return beneficiaryDetailsService.addBeneficiary(new BenificiaryDetails(0,beneficiaryDto.name,beneficiaryDto.mobileNo,wallet2));
 		else throw new CostumerNotFoundException("Invalid Input");
 	}
 
 	@GetMapping(value="/Beneficiary0services/delete/{id}")
-	public BeneficiaryDetails deleteBeneficiaryRest(@PathVariable("id") Integer id) throws CostumerNotFoundException {
+	public BenificiaryDetails deleteBeneficiaryRest(@PathVariable("id") Integer id) throws CostumerNotFoundException {
 		// TODO Auto-generated method stub
-		BeneficiaryDetails beneficiaryDetail=new BeneficiaryDetails();
+		BenificiaryDetails beneficiaryDetail=new BenificiaryDetails();
 		beneficiaryDetail.setId(id);
 		if(beneficiaryDetail!=null) {
 			
@@ -53,7 +52,7 @@ public class BeneficiaryDetails2Controller{
 	}
 
 	@GetMapping(value="/Beneficiary0services/view/{mobileNo}")
-	public BeneficiaryDetails viewBeneficiaryRest(String mobileNumber) throws CostumerNotFoundException {
+	public BenificiaryDetails viewBeneficiaryRest(String mobileNumber) throws CostumerNotFoundException {
 		if(mobileNumber!=null&&mobileNumber!="") {
 			return beneficiaryDetailsService.viewBeneficiary(mobileNumber);
 		}
@@ -62,7 +61,7 @@ public class BeneficiaryDetails2Controller{
 	}
 
 	@PostMapping(value="/Beneficiary0services/viewall")
-		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer) throws CostumerNotFoundException {
+		public List<BenificiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer) throws CostumerNotFoundException {
 		// TODO Auto-generated method stub
 		System.out.println(customer.getWallet().getId());
 		if(customer!=null) {
