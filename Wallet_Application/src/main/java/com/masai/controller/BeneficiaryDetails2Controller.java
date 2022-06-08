@@ -43,7 +43,7 @@ public class BeneficiaryDetails2Controller {
 	@Autowired
 	private UserSessionDao userDao;
 
-	@PostMapping(value="/Beneficiary0services/add")
+	@PostMapping(value="/beneficiaryservices/add")
 	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetails beneficiaryDetail, @RequestParam("key") String key) throws CustomerNotFoundException {
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
@@ -87,7 +87,7 @@ public class BeneficiaryDetails2Controller {
 	
 	
 	
-	@DeleteMapping(value="/Beneficiary0services")
+	@DeleteMapping(value="/beneficiaryservices")
 	public BeneficiaryDetails deleteBeneficiaryRest(@RequestParam("phone") String phone, @RequestParam("key") String key) throws CustomerNotFoundException {
 		
 		
@@ -130,7 +130,7 @@ public class BeneficiaryDetails2Controller {
 	
 	
 	
-	@GetMapping(value="/Beneficiary0services/view/")
+	@GetMapping(value="/beneficiaryservices/view/")
 	public BeneficiaryDetails viewBeneficiaryRest(@RequestParam String mobileNumber, @RequestParam("key") String key) throws CustomerNotFoundException {
 		
 		
