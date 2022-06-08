@@ -5,13 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.masai.DTO.AddMoneyDTO;
 import com.masai.DTO.CustomerDTO;
+import com.masai.DTO.DepositDTO;
 import com.masai.entity.BankAccount;
+import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
 import com.masai.entity.UserSession;
-import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BankAccountRepo;
+import com.masai.repository.BeneficiaryDetailsDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.UserSessionDao;
 
@@ -29,9 +31,10 @@ public class CustomerServiceImpl implements customerServiceIntr{
 //	private TransactionDao trans;
 	@Autowired
 	private BankAccountRepo bankR;
+	@Autowired
+	private BeneficiaryDetailsDao bene;
 	
 	public Customer createAcc(Customer cs)throws CustomerNotFoundException  {
-		// TODO Auto-generated method stub
 		Optional<Customer> opt=wdo.findById(cs.getMobileNumber());
 		
 		if(opt.isPresent()){
@@ -58,39 +61,53 @@ public class CustomerServiceImpl implements customerServiceIntr{
 
 
 	@Override
-	public Customer depositAmount(String mobile, Double amount) throws CustomerNotFoundException {
-		//System.out.println(mobile+""+amount);
-		    Optional<Customer> opt=wdo.findById(mobile);
-		    if(opt.isPresent()==false) {
-		    	throw new CustomerNotFoundException("Customer not found with this : "+mobile);
-		    }
-		    
-		    Customer cs=opt.get();
-		    Wallet wlt=cs.getWallet();
-		    wlt.setBalance(wlt.getBalance()+amount);
-		    Transaction tr=new Transaction();
-		    tr.setAmount(amount);
-		    tr.setDescription("Deposit");
-		    tr.setTransactionType("Credit");
-		    tr.setDateTime(LocalDateTime.now());
-		    wlt.getTran().add(tr);
-		    cs.setWallet(wlt);
-		return wdo.save(cs);
+	public Customer depositAmount(DepositDTO deposit, String mobile) throws CustomerNotFoundException {
+		
+		Optional<Customer> customer =wdo.findById(mobile);
+		
+		BeneficiaryDetails beneficiary =bene.findByMobileNoAndWalletId(deposit.getMobile(),customer.get().getWallet().getId());
+		if(beneficiary==null) 
+			throw new CustomerNotFoundException("Beneficiary Not Found in your beneficiary list first add in your list.");
+		Optional<Customer> customer2=wdo.findById(beneficiary.getMobileNo());
+		Customer cust1=customer.get();
+		Customer cust2=customer2.get();
+		
+		if(cust1.getWallet().getBalance()<deposit.getAmount())
+			throw new  CustomerNotFoundException("Balance Not Enough in Your Account");
+		
+		cust1.getWallet().setBalance(cust1.getWallet().getBalance()-deposit.getAmount());
+		cust2.getWallet().setBalance(cust2.getWallet().getBalance()+deposit.getAmount());
+		 
+		Transaction tran1=new Transaction();
+		tran1.setAmount(deposit.getAmount());
+		tran1.setDateTime(LocalDateTime.now());
+		tran1.setDescription("Transefer Ammount to The "+deposit.getMobile());
+		tran1.setTransactionType("Debit");
+		
+		Transaction tran2=new Transaction();
+		tran1.setAmount(deposit.getAmount());
+		tran1.setDateTime(LocalDateTime.now());
+		tran1.setDescription("Accept Ammount to The "+cust1.getMobileNumber());
+		tran1.setTransactionType("Credit");
+		
+		cust1.getWallet().getTran().add(tran1);
+		cust2.getWallet().getTran().add(tran2);
+		
+		wdo.save(cust2);
+		return wdo.save(cust1);
 	}
 
 
-	@Override
-	public String fundTransfer(String mobileNo, String targetMobileNo, Double amount) throws CustomerNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public String fundTransfer(String mobileNo, String targetMobileNo, Double amount) throws CustomerNotFoundException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 	@Override
 	public Customer getListCustomer(String key) throws CustomerNotFoundException {
-		
 		UserSession userS=user.findByUuid(key);	
-		
 		
 		return wdo.findById(userS.getMobile()).get();
 	}

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.DTO.AddMoneyDTO;
 import com.masai.DTO.CustomerDTO;
+import com.masai.DTO.DepositDTO;
 import com.masai.DTO.LoginDTO;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
@@ -113,6 +114,22 @@ public class CustomerController {
 		
 		Customer ucs=csi.updateCustomer(cs);
 		return new ResponseEntity<>(ucs,HttpStatus.ACCEPTED);
+	}
+	
+	@PatchMapping("/customers/deposit")
+	public ResponseEntity<Customer> depositAmmoubt(@RequestBody DepositDTO deposit,@RequestParam("key") String key){
+		UserSession user=userDao.findByUuid(key);
+		if(user==null) {
+			throw new CustomerNotFoundException("You are not authoraised person please login first.");
+		}
+		LocalDateTime prev=user.getDateTime();
+		LocalDateTime date=LocalDateTime.now();
+		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
+			userDao.delete(user);
+			throw new CustomerNotFoundException("Your session is expired please login again");
+		}
+		
+		return new ResponseEntity<>(csi.depositAmount(deposit,user.getMobile()),HttpStatus.ACCEPTED);
 	}
 	
 

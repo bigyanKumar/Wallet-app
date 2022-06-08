@@ -6,42 +6,46 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.DTO.BeneficiaryDTO;
 import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BeneficiaryDetailsDao;
-import com.masai.repository.CustomerDao;
-import com.masai.repository.UserSessionDao;
-import com.masai.repository.WalletDaoJpa;
+
 
 
 @Service
 public class BeneficiaryDetailsService implements BeneficiaryDetailsServiceInter {
 	@Autowired
 	private BeneficiaryDetailsDao beneficiaryDao;
-	@Autowired
-	private CustomerDao customerDao;
-	
-	
-	
-	
-	@Autowired
-	private WalletDaoJpa wDao;
-	@Autowired
-	private UserSessionDao userDao;
-	
+//	@Autowired
+//	private CustomerDao customerDao;
+//	
+//	
+//	
+//	
+//	@Autowired
+//	private WalletDaoJpa wDao;
+//	@Autowired
+//	private UserSessionDao userDao;
+//	
 	
 	
 	
 	
 
 	@Override
-	public BeneficiaryDetails addBeneficiary(BeneficiaryDetails beneficiaryDetail) throws CustomerNotFoundException {
+	public BeneficiaryDTO addBeneficiary(Customer cust,Wallet wallet) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
-		customerDao.findById(beneficiaryDetail.getMobileNo()).orElseThrow(()->new CustomerNotFoundException("this mobile number not registered with any customer"));
+		BeneficiaryDetails bene=new BeneficiaryDetails();
 		
-		return beneficiaryDao.save(beneficiaryDetail);
+		bene.setMobileNo(cust.getMobileNumber());
+		bene.setName(cust.getName());
+		bene.setWallet(wallet);
+		beneficiaryDao.save(bene);
+		
+		return beneficiaryDao.findByWalletId(wallet.getId());
 	}
 
 	@Override
