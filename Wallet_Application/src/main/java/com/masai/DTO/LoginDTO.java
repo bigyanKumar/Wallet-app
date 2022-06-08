@@ -6,14 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class CustomerDTO {
+public class LoginDTO {
+	
+	private String mobileNumber;
+	private String password;
 
-	private String name;
-	private String mobileNo;
-	private Double balance;
-	
-	
 }

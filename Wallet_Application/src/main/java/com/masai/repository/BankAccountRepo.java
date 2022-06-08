@@ -16,8 +16,7 @@ public interface BankAccountRepo extends JpaRepository<BankAccount, Integer>{
 
         @Query("select new com.masai.DTO.BankAccountDTO(b.accountNo, b.bankName, b.ifscCode, b.bankBalance)"
   		+ " from BankAccount b where b.wallet.id=:val")
-           public List<BankAccountDTO> viewAccount(@Param("val") Integer wallet);
-	
+           public List<BankAccountDTO> viewAccount(@Param("val") Integer wallet);    
 
 	public BankAccount findByBankNameAndWalletId(String bankName,Integer id);
 	

@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
 import com.masai.entity.BillPayment;
 import com.masai.entity.Customer;
 import com.masai.entity.Transaction;
-import com.masai.entity.Wallet;
+
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.globalExceptionHandler.InsufficientAmountException;
 import com.masai.repository.BillPaymentDao;
 import com.masai.repository.CustomerDao;
-import com.masai.repository.TransactionDao;
 import com.masai.repository.UserSessionDao;
-import com.masai.repository.WalletDaoJpa;
+
 
 	
 
@@ -31,14 +30,14 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 	@Autowired
 	private BillPaymentDao billpd;
 	
-	@Autowired
-	private WalletDaoJpa walletdao;
-	
-	@Autowired
-	private TransactionDao transactionDAO;
-	
-	@Autowired
-	private UserSessionDao userDao;
+//	@Autowired
+//	private WalletDaoJpa walletdao;
+//	
+//	@Autowired
+//	private TransactionDao transactionDAO;
+//	
+//	@Autowired
+//	private UserSessionDao userDao;
 
 	
     @Autowired

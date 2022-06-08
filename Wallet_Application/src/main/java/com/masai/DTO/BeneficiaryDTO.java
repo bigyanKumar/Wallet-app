@@ -9,11 +9,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CustomerDTO {
-
-	private String name;
+public class BeneficiaryDTO {
+	
+	private Integer id;
 	private String mobileNo;
-	private Double balance;
-	
-	
+	private String name;
+
 }
