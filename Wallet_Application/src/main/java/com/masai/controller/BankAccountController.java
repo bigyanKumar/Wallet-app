@@ -74,6 +74,13 @@ public class BankAccountController{
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
+		Optional<Customer> opt1 = cusDao.findById(user.getMobile());
+		Optional<BankAccount> opt2 = bankDao.findById(accountNumber);
+		if(opt1.get().getWallet().getId()!=opt2.get().getWallet().getId())
+			 throw new CustomerNotFoundException("Failed: Invalid Uuui Id");
+		
+		
+		
 		return new ResponseEntity<BankAccount>(bankService.getAccountByAccountNumber(accountNumber),HttpStatus.CREATED);
 				
 	}
