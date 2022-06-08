@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,7 +61,7 @@ public class BeneficiaryDetails2Controller {
 		if(custo.get().getMobileNumber()==custo2.get().getMobileNumber())
 			throw new CustomerNotFoundException("You cann't insert same mobile number in beneficiary details");
 	
-		if(beneficiaryDao.findByMobileNo(mobile)!=null)
+		if(beneficiaryDao.findByMobileNoAndWalletId(mobile,custo.get().getWallet().getId())!=null)
 			throw new CustomerNotFoundException("This beneficiary already exits to your account");
 		
 		return  beneficiaryDetailsService.addBeneficiary(custo2.get(),custo.get().getWallet());

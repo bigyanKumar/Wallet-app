@@ -20,6 +20,6 @@ public interface BeneficiaryDetailsDao extends JpaRepository<BeneficiaryDetails,
 	public BeneficiaryDetails findByMobileNoAndWalletId(String mobile,Integer id);
 	
 	  @Query("select new com.masai.DTO.BeneficiaryDTO(b.id, b.mobileNo, b.name)"
-		  		+ " from BeneficiaryDetails b where b.wallet.id=?1")
-	public BeneficiaryDTO findByWalletId(Integer id);
+		  		+ " from BeneficiaryDetails b where b.mobileNo=?1 AND b.wallet.id=?2")
+	public BeneficiaryDTO findByWalletId(String mobile,Integer id);
 }

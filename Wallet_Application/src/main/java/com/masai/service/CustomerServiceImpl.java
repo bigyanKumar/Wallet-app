@@ -70,6 +70,10 @@ public class CustomerServiceImpl implements customerServiceIntr{
 			throw new CustomerNotFoundException("Beneficiary Not Found in your beneficiary list first add in your list.");
 		Optional<Customer> customer2=wdo.findById(beneficiary.getMobileNo());
 		Customer cust1=customer.get();
+		
+		
+		
+		
 		Customer cust2=customer2.get();
 		
 		if(cust1.getWallet().getBalance()<deposit.getAmount())
@@ -85,10 +89,10 @@ public class CustomerServiceImpl implements customerServiceIntr{
 		tran1.setTransactionType("Debit");
 		
 		Transaction tran2=new Transaction();
-		tran1.setAmount(deposit.getAmount());
-		tran1.setDateTime(LocalDateTime.now());
-		tran1.setDescription("Accept Ammount to The "+cust1.getMobileNumber());
-		tran1.setTransactionType("Credit");
+		tran2.setAmount(deposit.getAmount());
+		tran2.setDateTime(LocalDateTime.now());
+		tran2.setDescription("Accept Ammount to The "+cust1.getMobileNumber());
+		tran2.setTransactionType("Credit");
 		
 		cust1.getWallet().getTran().add(tran1);
 		cust2.getWallet().getTran().add(tran2);

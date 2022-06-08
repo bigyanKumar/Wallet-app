@@ -45,7 +45,7 @@ public class BeneficiaryDetailsService implements BeneficiaryDetailsServiceInter
 		bene.setWallet(wallet);
 		beneficiaryDao.save(bene);
 		
-		return beneficiaryDao.findByWalletId(wallet.getId());
+		return beneficiaryDao.findByWalletId(cust.getMobileNumber(),wallet.getId());
 	}
 
 	@Override
