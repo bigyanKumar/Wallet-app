@@ -25,7 +25,6 @@ import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BeneficiaryDetailsDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.UserSessionDao;
-import com.masai.repository.WalletDaoJpa;
 import com.masai.service.BeneficiaryDetailsService;
 
 
@@ -37,8 +36,8 @@ public class BeneficiaryDetails2Controller {
 	@Autowired
 	private BeneficiaryDetailsDao beneficiaryDao;
 	@Autowired
-	private WalletDaoJpa wDao;
-	@Autowired
+//	private WalletDaoJpa wDao;
+//	@Autowired
 	private CustomerDao customerDao;
 	@Autowired
 	private UserSessionDao userDao;

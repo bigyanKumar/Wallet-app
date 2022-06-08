@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.masai.DTO.CustomerDTO;
+import com.masai.DTO.LoginDTO;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 	private UserSessionDao userDao;
 
 	@Override
-	public UserSession loginService(CustomerDTO cDto) throws CustomerNotFoundException {
+	public UserSession loginService(LoginDTO cDto) throws CustomerNotFoundException {
 		
 		Optional<UserSession> user = userDao.findById(cDto.getMobileNumber());
 		
