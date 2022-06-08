@@ -116,7 +116,7 @@ public class BankAccountController{
 	
 	
 	@PostMapping("/transfermoney")
-	 public ResponseEntity<BankAccount> sendMoney(@RequestParam("key") String key,@RequestParam("accountNo1") Integer acc1,@RequestParam("accountNo2") Integer acc2, @RequestParam("balance") double balance)
+	 public ResponseEntity<BankAccount> sendMoney(@RequestParam("key") String key,@RequestParam("From A/c")Integer acc1,@RequestParam("To A/c") Integer acc2, @RequestParam("balance") double balance)
 	 {
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
@@ -131,7 +131,15 @@ public class BankAccountController{
 		
 		
 		
-		return new ResponseEntity<BankAccount>(bankService.moneyTransfer(acc1, acc2, balance),HttpStatus.ACCEPTED);
+		Optional<Customer> opt1 = cusDao.findById(user.getMobile());
+		Optional<BankAccount> opt2 = bankDao.findById(acc1);
+		
+		
+		if(opt1.get().getWallet().getId()!=opt2.get().getWallet().getId())
+			 throw new CustomerNotFoundException("Please Enter Correct Sending Account Id");
+		
+		
+		return new ResponseEntity<BankAccount>(bankService.moneyTransfer(acc1, acc2, balance,opt1.get().getWallet()),HttpStatus.ACCEPTED);
 	 }
 	
 	
