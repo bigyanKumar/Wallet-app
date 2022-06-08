@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.masai.DTO.BeneficiaryDTO;
 import com.masai.entity.BeneficiaryDetails;
 import com.masai.entity.Customer;
 import com.masai.entity.UserSession;
@@ -43,7 +43,7 @@ public class BeneficiaryDetails2Controller {
 	private UserSessionDao userDao;
 
 	@PostMapping(value="/beneficiaryservices/add")
-	public BeneficiaryDetails addBeneficiaryRest(@RequestBody BeneficiaryDetails beneficiaryDetail, @RequestParam("key") String key) throws CustomerNotFoundException {
+	public BeneficiaryDTO addBeneficiaryRest(@RequestParam String mobile, @RequestParam("key") String key) throws CustomerNotFoundException {
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
@@ -55,26 +55,17 @@ public class BeneficiaryDetails2Controller {
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
 		
-		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
-		Wallet wallet=cusopt.get().getWallet();
-		beneficiaryDetail.setWallet(wallet);
+		Optional<Customer> custo=customerDao.findById(user.getMobile());
+		Optional<Customer> custo2=customerDao.findById(mobile);
+		if(!custo2.isPresent())
+			throw new CustomerNotFoundException("This Customer detail not found in our database");
+		if(custo.get().getMobileNumber()==custo2.get().getMobileNumber())
+			throw new CustomerNotFoundException("You cann't insert same mobile number in beneficiary details");
+	
+		if(beneficiaryDao.findByMobileNo(mobile)!=null)
+			throw new CustomerNotFoundException("This beneficiary already exits to your account");
 		
-		
-		Optional<BeneficiaryDetails> optBene2=Optional.ofNullable(beneficiaryDao.findByMobileNoAndWallet(beneficiaryDetail.getMobileNo(),wallet));
-		
-		
-		
-		if(optBene2.isPresent()) {
-			throw new CustomerNotFoundException("beneficiary already exist");
-		}
-		
-//		wDao.findById(beneficiaryDto.walletId).orElseThrow(()-> new CostumerNotFoundException("wallet nor found"));
-//		Optional<Wallet> wallet=Optional.ofNullable(wDao.getById(beneficiaryDto.walletId));
-//		Wallet wallet2=wallet.get();
-//		if(beneficiaryDto!=null&&wallet.isPresent())
-//			
-		return  beneficiaryDetailsService.addBeneficiary(beneficiaryDetail);
-//		else throw new CostumerNotFoundException("Invalid Input");
+		return  beneficiaryDetailsService.addBeneficiary(custo2.get(),custo.get().getWallet());
 	}
 
 	
@@ -167,7 +158,7 @@ public class BeneficiaryDetails2Controller {
 	
 	
 
-	@PostMapping(value="/Beneficiary0services/viewall")
+	@PostMapping(value="/Beneficiaryservices/viewall")
 		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestParam("key") String key) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		
@@ -188,14 +179,9 @@ public class BeneficiaryDetails2Controller {
 		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
 		Customer customer=cusopt.get();
 		System.out.println(customer.getWallet().getId());
-		if(customer!=null) {
-//			int a=customer.getWallet().getId();
+
 			return beneficiaryDetailsService.viewAllBeneficiary(customer);
-			
-		}
-		throw new CustomerNotFoundException("Invalid Input");
+		
 	}
-	
-//asda
 	
 }
