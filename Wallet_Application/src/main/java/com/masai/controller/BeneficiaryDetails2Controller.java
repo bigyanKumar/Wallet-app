@@ -168,7 +168,7 @@ public class BeneficiaryDetails2Controller {
 	
 
 	@PostMapping(value="/Beneficiary0services/viewall")
-		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestBody Customer customer,@RequestParam("key") String key) throws CustomerNotFoundException {
+		public List<BeneficiaryDetails> viewAllBeneficiaryRest(@RequestParam("key") String key) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
 		
 		
@@ -183,14 +183,15 @@ public class BeneficiaryDetails2Controller {
 			userDao.delete(user);
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
+
 		
-		
-		
-		
+		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
+		Customer customer=cusopt.get();
 		System.out.println(customer.getWallet().getId());
 		if(customer!=null) {
-			int a=customer.getWallet().getId();
+//			int a=customer.getWallet().getId();
 			return beneficiaryDetailsService.viewAllBeneficiary(customer);
+			
 		}
 		throw new CustomerNotFoundException("Invalid Input");
 	}
