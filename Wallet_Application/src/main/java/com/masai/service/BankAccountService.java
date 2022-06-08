@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.masai.DTO.BankAccountDTO;
 import com.masai.entity.BankAccount;
+import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 
 public interface BankAccountService {
@@ -16,7 +17,7 @@ public interface BankAccountService {
 	
 	public String removeAccount(Integer accountNo)throws CustomerNotFoundException;
 	
-	public BankAccount moneyTransfer(Integer accountNumber1,Integer accountNumber2, double balance);
+	public BankAccount moneyTransfer(Integer accountNumber1,Integer accountNumber2, double balance,Wallet wallet);
 	
 
 }

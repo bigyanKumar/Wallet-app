@@ -1,5 +1,6 @@
 package com.masai.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.masai.DTO.BankAccountDTO;
 import com.masai.entity.BankAccount;
+import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BankAccountRepo;
+import com.masai.repository.CustomerDao;
+import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDaoJpa;
 
 
@@ -22,7 +26,13 @@ public class BankAccountServiceImpl implements BankAccountService {
 	private BankAccountRepo bankAccRepo;
 	
 	@Autowired
-	private WalletDaoJpa walletRepo;	
+	TransactionDao trDao;
+	
+	@Autowired
+	private WalletDaoJpa walletRepo;
+	
+	@Autowired
+	private CustomerDao cusDao;
 	
 	@Override
 	public String createBankAccount(BankAccount bankAccount) {
@@ -96,18 +106,47 @@ public class BankAccountServiceImpl implements BankAccountService {
 	
 	
 	@Override
-	public BankAccount moneyTransfer(Integer accountNumber1, Integer accountNumber2, double balance) {
+	public BankAccount moneyTransfer(Integer accountNumber1, Integer accountNumber2, double balance,Wallet wallet) {
            
 		    Optional<BankAccount> opt1 = bankAccRepo.findById(accountNumber1);
 		    Optional<BankAccount> opt2 = bankAccRepo.findById(accountNumber2);
 		    
+		    
+		    
 		    if(opt1.isPresent()&&opt2.isPresent())
 		    {
+		    
+		     if(balance <= opt1.get().getBankBalance())
+		     {
+		   
 		    	opt2.get().setBankBalance(opt2.get().getBankBalance()+balance);
+		    	
 		    	opt1.get().setBankBalance(opt1.get().getBankBalance()-balance);
+		    	
+		    	Transaction tr = new Transaction();
+		    	  tr.setDateTime(LocalDateTime.now());
+		    	  tr.setAmount(balance);
+		    	  tr.setTransactionType("Debit");
+		    	  tr.setDescription("Sent to Bank "+accountNumber1);
+		    	  opt1.get().getWallet().getTran().add(tr);
+		    	  
+		    	  Transaction tr1 = new Transaction();
+		    	  tr1.setDateTime(LocalDateTime.now());
+		    	  tr1.setAmount(balance);
+		    	  tr1.setTransactionType("Credit");
+		    	  tr1.setDescription("Received to Bank "+accountNumber2);
+		    	  opt2.get().getWallet().getTran().add(tr1);
+		    	  
+
 		    	bankAccRepo.save(opt2.get());
+		    	
 		    	bankAccRepo.save(opt1.get());
+		    	
 		    	return opt1.get();
+		     }
+		     else
+		    	 throw new CustomerNotFoundException("Insufficient Fund");
+		    	
 		    }
 		    else
 		    	throw new CustomerNotFoundException("Enter Correct Account Number");
