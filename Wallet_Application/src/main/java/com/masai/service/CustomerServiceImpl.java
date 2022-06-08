@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements customerServiceIntr{
 		Optional<Customer> opt=wdo.findById(cs.getMobileNumber());
 		
 		if(opt.isPresent()){
-			throw new CustomerNotFoundException("Customer is present already with this mobile number : "+cs.getMobileNumber());
+			throw new CustomerNotFoundException("Customer is already present with this mobile number : "+cs.getMobileNumber());
 		}
 		Transaction tr=new Transaction();
 		tr.setAmount(cs.getWallet().getBalance());
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements customerServiceIntr{
 		
 		BeneficiaryDetails beneficiary =bene.findByMobileNoAndWalletId(deposit.getMobile(),customer.get().getWallet().getId());
 		if(beneficiary==null) 
-			throw new CustomerNotFoundException("Beneficiary Not Found in your beneficiary list first add in your list.");
+			throw new CustomerNotFoundException("Beneficiary Not Found in your beneficiary list first add in your list first.");
 		Optional<Customer> customer2=wdo.findById(beneficiary.getMobileNo());
 		Customer cust1=customer.get();
 		
@@ -85,13 +85,13 @@ public class CustomerServiceImpl implements customerServiceIntr{
 		Transaction tran1=new Transaction();
 		tran1.setAmount(deposit.getAmount());
 		tran1.setDateTime(LocalDateTime.now());
-		tran1.setDescription("Transefer Ammount to The "+deposit.getMobile());
+		tran1.setDescription("Transefered Ammount to The "+deposit.getMobile());
 		tran1.setTransactionType("Debit");
 		
 		Transaction tran2=new Transaction();
 		tran2.setAmount(deposit.getAmount());
 		tran2.setDateTime(LocalDateTime.now());
-		tran2.setDescription("Accept Ammount to The "+cust1.getMobileNumber());
+		tran2.setDescription("Ammount recived to The "+cust1.getMobileNumber());
 		tran2.setTransactionType("Credit");
 		
 		cust1.getWallet().getTran().add(tran1);

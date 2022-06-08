@@ -40,7 +40,7 @@ public class BillPaymentController {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	@PostMapping("/electricity")
+	@PostMapping("/billpayment")
 	public ResponseEntity<BillPayment> payBill(@Valid @RequestBody BillPayment billPayment, @RequestParam("key") String key) {
 		
 		UserSession user=userDao.findByUuid(key);
