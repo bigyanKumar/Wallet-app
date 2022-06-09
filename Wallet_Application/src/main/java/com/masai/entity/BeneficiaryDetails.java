@@ -26,6 +26,7 @@ public class BeneficiaryDetails {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String name;
+	
 	private String mobileNo;
 	@ManyToOne(targetEntity = Wallet.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="walletId")
