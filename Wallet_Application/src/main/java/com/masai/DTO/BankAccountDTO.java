@@ -12,9 +12,11 @@ import lombok.ToString;
 public class BankAccountDTO {
 	
 	private Integer accountNo;
+	
 	private String ifscCode;
+	
 	private String bankName;
+	
 	private Double bankBalance;
 	
-
 }

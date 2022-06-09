@@ -58,7 +58,6 @@ public class BillPaymentController {
 		return new ResponseEntity<BillPayment>( billservices.payBillPayment(billPayment,key),HttpStatus.ACCEPTED);
 		
 	}
-	
 
 		@GetMapping("/bills")
 		public List<BillPayment> getAllBillPayment(@RequestParam("key") String key){

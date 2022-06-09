@@ -14,6 +14,7 @@ import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BankAccountRepo;
+import com.masai.repository.CustomerDao;
 import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDaoJpa;
 
@@ -30,9 +31,11 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Autowired
 	private WalletDaoJpa walletRepo;
 	
-//	@Autowired
-//	private CustomerDao cusDao;
+   @Autowired
+   private CustomerDao cusDao;
 	
+   
+   // for creating New Bank Account
 	@Override
 	public String createBankAccount(BankAccount bankAccount) {
 		
@@ -61,6 +64,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 		return newAccount.getBankName()+" is successfully added..";
 	}
 
+	// for get an Account By A/c Number
 	@Override
 	public BankAccount getAccountByAccountNumber(Integer accountNumber) throws CustomerNotFoundException {
         
@@ -72,6 +76,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 			throw new CustomerNotFoundException("No Account Found with this Accoutn Number: "+accountNumber); 
 	}
 	
+	// get all A/c by wallet Id
 	@Override
 	public List<BankAccountDTO> getAccountByWalletId(Integer walletId) throws CustomerNotFoundException {
         
@@ -84,7 +89,7 @@ public class BankAccountServiceImpl implements BankAccountService {
       
 	}
 	
-	
+	// for removing an account by Account Number
 	@Override
 	public String removeAccount(Integer accountNo) throws CustomerNotFoundException {
                   
@@ -152,9 +157,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         
 	}
 	
-	
-	
-	
+
 	//for generating unique number
 	 public static int generateUniqueId() {
 		 

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,18 +43,20 @@ public class BankAccountController{
 	CustomerDao cusDao;
 	
 	@PostMapping("/banks")
-	public ResponseEntity<String> createNewAccount(@RequestParam("key") String key,@RequestBody BankAccount bankAccount)
+	public ResponseEntity<String> createNewAccount( @RequestParam("key") String key,@Valid @RequestBody BankAccount bankAccount)
 	{
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
+		
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
 			userDao.delete(user);
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
+		
 		Optional<Customer> opt = cusDao.findById(user.getMobile());
 		
 		bankAccount.setWallet(opt.get().getWallet());
@@ -103,7 +107,8 @@ public class BankAccountController{
 		Optional<Customer> opt = cusDao.findById(user.getMobile());
 		
 		return new ResponseEntity<>(bankService.getAccountByWalletId(opt.get().getWallet().getId()), HttpStatus.OK);
-	}  
+	}
+	
 	@DeleteMapping("/banks/{accountNumber}")
 	public ResponseEntity<String> removeAccount(@RequestParam("key") String key,@PathVariable("accountNumber") Integer accountNumber)
 	{
@@ -111,6 +116,7 @@ public class BankAccountController{
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
+		
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
@@ -129,6 +135,7 @@ public class BankAccountController{
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
+		
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
