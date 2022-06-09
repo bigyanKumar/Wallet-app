@@ -49,6 +49,7 @@ public class BankAccountController{
 		if(user==null) {
 			throw new CustomerNotFoundException("You are not authoraised person please login first.");
 		}
+		
 		LocalDateTime prev=user.getDateTime();
 		LocalDateTime date=LocalDateTime.now();
 		if (prev.getDayOfMonth() != date.getDayOfMonth()) {
