@@ -107,7 +107,8 @@ public class BankAccountController{
 		Optional<Customer> opt = cusDao.findById(user.getMobile());
 		
 		return new ResponseEntity<>(bankService.getAccountByWalletId(opt.get().getWallet().getId()), HttpStatus.OK);
-	}  
+	}
+	
 	@DeleteMapping("/banks/{accountNumber}")
 	public ResponseEntity<String> removeAccount(@RequestParam("key") String key,@PathVariable("accountNumber") Integer accountNumber)
 	{
