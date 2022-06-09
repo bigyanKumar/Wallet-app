@@ -56,6 +56,7 @@ public class BankAccountController{
 			userDao.delete(user);
 			throw new CustomerNotFoundException("Your session is expired please login again");
 		}
+		
 		Optional<Customer> opt = cusDao.findById(user.getMobile());
 		
 		bankAccount.setWallet(opt.get().getWallet());
