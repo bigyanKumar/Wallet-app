@@ -29,6 +29,7 @@ public class BankAccount {
 	@NotNull
 	@Pattern(regexp = "[0-9][a-z][A-Z]{5}", message="Invalid Ifsc Code Format Length: 6 and mixed of [0-9][a-z][A-Z]")
 	private String ifscCode;
+	
 	@NotNull
 	@Size(min=7, max =15, message="Bank Name must be min 7 and max 15")
 	private String bankName;
