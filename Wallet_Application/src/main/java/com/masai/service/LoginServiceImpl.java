@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		
 			if(!customer.get().getPassword().equals(cDto.getPassword()))
-				throw new CustomerNotFoundException("Password Doesn't Mathch");
+				throw new CustomerNotFoundException("Password Doesn't Match");
 			
 			
 			
@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
 		 userDao.delete(user);  
 		return "Successfully Logged out. thank you!";
 		}else {
-			throw new CustomerNotFoundException("User not Fount in our session");
+			throw new CustomerNotFoundException("User not Found in our session");
 		}
 	}
 
