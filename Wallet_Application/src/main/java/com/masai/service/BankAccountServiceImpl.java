@@ -89,7 +89,7 @@ public class BankAccountServiceImpl implements BankAccountService {
       
 	}
 	
-	
+	// for removing an account by Account Number
 	@Override
 	public String removeAccount(Integer accountNo) throws CustomerNotFoundException {
                   
