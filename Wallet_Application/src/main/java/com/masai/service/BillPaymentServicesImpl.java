@@ -28,7 +28,7 @@ import com.masai.repository.UserSessionDao;
 public class BillPaymentServicesImpl implements BillPaymentServices {
 
 	@Autowired
-	private BillPaymentDao billpd;
+	private BillPaymentDao billPaymentDao;
 
 
 	
@@ -60,7 +60,7 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 		myTransaction.setTransactionType("Debit");
 		
 		billPayment.getWallet().getTran().add(myTransaction);
-		billpd.save(billPayment);
+		billPaymentDao.save(billPayment);
 		
 
 		return billPayment;
@@ -72,7 +72,7 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 	public List<BillPayment> viewBillPayment(String key) throws CustomerNotFoundException {
 		// TODO Auto-generated method stub
         Optional<Customer> cust=customer.findById(user.findByUuid(key).getMobile());
-        List<BillPayment> bill = billpd.findAllBillPaymentsByWalletId(cust.get().getWallet().getId());
+        List<BillPayment> bill = billPaymentDao.findAllBillPaymentsByWalletId(cust.get().getWallet().getId());
         
         return bill;
 	}
