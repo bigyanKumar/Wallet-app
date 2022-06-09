@@ -16,6 +16,7 @@ public class BankAccountDTO {
 	private String ifscCode;
 	
 	private String bankName;
+	
 	private Double bankBalance;
 	
 
