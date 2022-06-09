@@ -26,6 +26,7 @@ public class BankAccount {
 	
 	@Id
 	private Integer accountNo;
+	
 	@NotNull
 	@Pattern(regexp = "[0-9][a-z][A-Z]{5}", message="Invalid Ifsc Code Format Length: 6 and mixed of [0-9][a-z][A-Z]")
 	private String ifscCode;
