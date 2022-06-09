@@ -41,7 +41,7 @@ public class CustomerController {
 //		return "Hello buddy this is testing";
 //	}
 	@PostMapping("userlogin")
-	public ResponseEntity<UserSession> loginSession(@RequestBody LoginDTO cusD){
+	public ResponseEntity<UserSession> loginSession(@Valid @RequestBody LoginDTO cusD){
 		
 		return new ResponseEntity<>(login.loginService(cusD),HttpStatus.OK);
 	}
