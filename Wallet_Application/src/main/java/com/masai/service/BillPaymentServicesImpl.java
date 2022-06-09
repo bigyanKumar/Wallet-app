@@ -29,15 +29,7 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
 
 	@Autowired
 	private BillPaymentDao billpd;
-	
-//	@Autowired
-//	private WalletDaoJpa walletdao;
-//	
-//	@Autowired
-//	private TransactionDao transactionDAO;
-//	
-//	@Autowired
-//	private UserSessionDao userDao;
+
 
 	
     @Autowired
@@ -84,6 +76,7 @@ public class BillPaymentServicesImpl implements BillPaymentServices {
         
         return bill;
 	}
+
 
 
 
