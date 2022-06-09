@@ -37,6 +37,7 @@ public class BankAccount {
 	@NotNull
 	@Min(0)
 	private Double bankBalance;
+	
 	@ManyToOne(cascade = CascadeType.ALL,targetEntity = Wallet.class)
 	@JoinColumn(name="walletId")
 	private Wallet wallet;
