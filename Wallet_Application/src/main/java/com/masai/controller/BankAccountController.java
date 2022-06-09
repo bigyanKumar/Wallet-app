@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class BankAccountController{
 	CustomerDao cusDao;
 	
 	@PostMapping("/banks")
-	public ResponseEntity<String> createNewAccount(@RequestParam("key") String key,@RequestBody BankAccount bankAccount)
+	public ResponseEntity<String> createNewAccount( @RequestParam("key") String key,@Valid @RequestBody BankAccount bankAccount)
 	{
 		UserSession user=userDao.findByUuid(key);
 		if(user==null) {
