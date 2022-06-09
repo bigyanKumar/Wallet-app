@@ -32,6 +32,7 @@ public class BankAccount {
 	@NotNull
 	@Size(min=7, max =15, message="Bank Name must be min 7 and max 15")
 	private String bankName;
+	
 	@NotNull
 	@Min(0)
 	private Double bankBalance;
