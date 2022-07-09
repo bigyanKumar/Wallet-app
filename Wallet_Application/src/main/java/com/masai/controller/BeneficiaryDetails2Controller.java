@@ -76,7 +76,7 @@ public class BeneficiaryDetails2Controller {
 	
 	
 	
-	@DeleteMapping(value="/beneficiaryservices")
+	@DeleteMapping(value="/beneficiaryservices/delete")
 	public BeneficiaryDetails deleteBeneficiaryRest(@RequestParam("phone") String phone, @RequestParam("key") String key) throws CustomerNotFoundException {
 		
 		
@@ -138,7 +138,7 @@ public class BeneficiaryDetails2Controller {
 		Optional<Customer> cusopt=customerDao.findById(user.getMobile());
 		Wallet wallet=cusopt.get().getWallet();
 		if(mobileNumber!=null&&mobileNumber!="") {
-			return beneficiaryDetailsService.viewBeneficiary(mobileNumber,wallet);
+			 beneficiaryDetailsService.viewBeneficiary(mobileNumber,wallet).setWallet(null);
 		}
 		throw new CustomerNotFoundException("Invalid Input");
 		
