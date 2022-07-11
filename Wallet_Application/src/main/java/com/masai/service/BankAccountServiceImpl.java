@@ -14,7 +14,6 @@ import com.masai.entity.Transaction;
 import com.masai.entity.Wallet;
 import com.masai.globalExceptionHandler.CustomerNotFoundException;
 import com.masai.repository.BankAccountRepo;
-import com.masai.repository.CustomerDao;
 import com.masai.repository.TransactionDao;
 import com.masai.repository.WalletDaoJpa;
 
@@ -31,8 +30,8 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Autowired
 	private WalletDaoJpa walletRepo;
 	
-   @Autowired
-   private CustomerDao cusDao;
+//   @Autowired
+//   private CustomerDao cusDao;
 	
    
    // for creating New Bank Account
