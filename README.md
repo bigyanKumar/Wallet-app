@@ -1,6 +1,6 @@
 <h1 align="center">  Online Payment Wallet Application </h1>
 
-Onine Payment Wallet Application where you can send and receive money and pay different bills.
+Online Payment Wallet Application where you can send and receive money and pay different bills.
 
 <img width="1118" alt="Screenshot 2022-09-28 at 9 37 15 PM" src="https://user-images.githubusercontent.com/97912572/192830593-051865af-17c0-43cb-8b8b-bafb291d1e12.png">
 
